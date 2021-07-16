@@ -4,18 +4,32 @@ site: Pet Photos
 <head>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css">
 </head>
+
+<body style="background-color: {{hex}};"></body>
+
 <body>
+
 
     <h1>{{ site }}</h1>
 
     {% unless page.url == '/' %}
     	<a href="/">Home</a>
-    {% endunless %}
+    
+        {% endunless %}
+
 
     {{ content }}
+    {% unless page.url == '/' %}
+    <figure>
+    <figcaption> Type of camera used: {{ exif_camera_model }} </figcaption>
+    <figcaption>Photo ID: {{ photo_id }}</figcaption>
+ </figure>
+    {% endunless %}
 
+    {% if page.url == '/' %}
     <ul>
         {% for photo in collections.photos %}
+
             <li>
                 <a href="{{ photo.url }}">
                     A {{ photo.data.photo_keyword }} photo
@@ -23,6 +37,13 @@ site: Pet Photos
                 </a>
             </li>
         {% endfor %}
+        
     </ul>
-
+    {% endif %}
+    
+    
+    <footer>
+        <p>Site Created by Alfredo Alcantar, Arsal Khan, Josephine Overbeek, Pedro Hernandez</p>
+        <p>Contact: <a href="">Group3@csu.fullerton.edu.com</a></p>
+    </footer>
 </body>
